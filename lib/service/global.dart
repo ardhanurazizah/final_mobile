@@ -19,18 +19,18 @@ errorSnackBar(BuildContext context, String text) {
 }
 
 class CRUD {
-  //getKategori() async {
-//     final url = Uri.parse(baseUrl + 'category');
-//     final prefs = await SharedPreferences.getInstance();
-//     const key = 'token';
-//     final token = prefs.get(key);
-//     final headers = {
-//       'Authorization': 'Bearer ' + '$token',
-//       'Accept': 'application/json',
-//     };
-//     final response = await get(url, headers: headers);
-//     return response;
-//   }
+  getKategori() async {
+    final url = Uri.parse(baseUrl + 'category');
+    final prefs = await SharedPreferences.getInstance();
+    const key = 'token';
+    final token = prefs.get(key);
+    final headers = {
+      'Authorization': 'Bearer ' + '$token',
+      'Accept': 'application/json',
+    };
+    final response = await get(url, headers: headers);
+    return response;
+  }
 
   Future<Response> addCategory(String name) async {
     final url = Uri.parse(baseUrl + 'category');
