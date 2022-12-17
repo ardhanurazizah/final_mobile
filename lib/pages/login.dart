@@ -1,6 +1,10 @@
+import 'dart:convert';
+
+import 'package:final_mobile/service/loginservice.dart';
 import 'package:flutter/material.dart';
 import 'package:final_mobile/pages/register.dart';
 import 'package:final_mobile/pages/listview.dart';
+import 'package:http/http.dart' as http;
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -10,6 +14,32 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final txtEmail = TextEditingController(text: 'superadmin@gmail.com');
+  final txtPassword = TextEditingController(text: 'password');
+
+  LoginPressed() async {
+    // if (txtEmail.isNotEmpty && txtPassword.isNotEmpty) {
+    http.Response response =
+        await AuthServices.login(txtEmail.text, txtPassword.text);
+    Map responseMap = jsonDecode(response.body);
+    print(response.body);
+    if (response.statusCode == 200) {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+          builder: (BuildContext context) => ListPage(),
+        ),
+        (route) => false,
+      );
+      //   } else {
+      //     errorSnackBar(context, 'wrong email or password');
+      //   }
+      // } else {
+      //   errorSnackBar(context, 'enter all required fields');
+      // }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -47,6 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                         border: OutlineInputBorder(),
                       ),
                       onChanged: (String value) {},
+                      initialValue: txtEmail.text,
                       validator: (value) {
                         return value!.isEmpty ? 'Please enter email' : null;
                       },
@@ -63,6 +94,7 @@ class _LoginPageState extends State<LoginPage> {
                         border: OutlineInputBorder(),
                       ),
                       onChanged: (String value) {},
+                      initialValue: txtPassword.text,
                       validator: (value) {
                         return value!.isEmpty ? 'Please enter password' : null;
                       },
@@ -73,13 +105,7 @@ class _LoginPageState extends State<LoginPage> {
                     Container(
                       width: double.infinity,
                       child: MaterialButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const ListPage()),
-                          );
-                        },
+                        onPressed: LoginPressed,
                         child: Text('Login'),
                         color: Colors.cyan,
                         textColor: Colors.white,
