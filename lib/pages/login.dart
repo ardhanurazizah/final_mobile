@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:final_mobile/pages/register.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -77,6 +78,19 @@ class _LoginPageState extends State<LoginPage> {
                         minWidth: double.infinity,
                         onPressed: () {},
                         child: Text('Login'),
+                        color: Colors.cyan,
+                        textColor: Colors.white,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 35),
+                      child: MaterialButton(
+                        minWidth: double.infinity,
+                        onPressed: () {},
+                        child: Text('Register'),
                         color: Colors.cyan,
                         textColor: Colors.white,
                       ),
