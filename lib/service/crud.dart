@@ -75,4 +75,19 @@ class CrudHelper {
     final response = await put(url, body: body, headers: headers);
     return response;
   }
+
+  Future<Response> deleteCategori(Category category) async {
+    final url = Uri.parse(_baseUrl + 'category/${category.id}');
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    const key = 'token';
+    final value = pref.get(key);
+    final token = value;
+    final headers = {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + '$token',
+    };
+
+    final response = await delete(url, headers: headers);
+    return response;
+  }
 }

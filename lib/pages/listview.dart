@@ -8,12 +8,15 @@ import 'package:http/http.dart' as http;
 import 'package:final_mobile/service/global.dart';
 import 'package:final_mobile/service/loginservice.dart';
 import '../model/category_model.dart';
+
 import 'package:final_mobile/service/crud.dart';
 
 import 'login.dart';
 
 class ListPage extends StatefulWidget {
-  const ListPage({Key? key}) : super(key: key);
+  const ListPage({
+    super.key,
+  });
 
   @override
   _ListPageState createState() => _ListPageState();
@@ -214,17 +217,23 @@ class _ListPageState extends State<ListPage> {
                                       ),
                                     ),
                                   ),
-                                  onDismissed: (DismissDirection direction) {
+                                  onDismissed:
+                                      (DismissDirection direction) async {
                                     if (direction ==
                                         DismissDirection.startToEnd) {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => EditPage(
-                                                  category: categories[index],
-                                                )),
-                                      );
-                                    } else {}
+                                      showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return EditPage(
+                                                category: categories[index]);
+                                          });
+                                    } else {
+                                      final response = await CrudHelper()
+                                          .deleteCategori(categories[index]);
+                                      print(response.body);
+                                      // Navigator.pushNamed(context, "/main");
+
+                                    }
                                   },
                                   child: Container(
                                     height: 100,
