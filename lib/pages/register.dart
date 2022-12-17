@@ -123,25 +123,6 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ),
                     SizedBox(
-                      height: 30,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 35),
-                      child: MaterialButton(
-                        minWidth: double.infinity,
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const LoginPage()),
-                          );
-                        },
-                        child: Text('Login'),
-                        color: Colors.cyan,
-                        textColor: Colors.white,
-                      ),
-                    ),
-                    SizedBox(
                       height: 15,
                     ),
                     Padding(
