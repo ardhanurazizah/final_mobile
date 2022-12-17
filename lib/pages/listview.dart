@@ -220,8 +220,9 @@ class _ListPageState extends State<ListPage> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) =>
-                                                const EditPage()),
+                                            builder: (context) => EditPage(
+                                                  category: categories[index],
+                                                )),
                                       );
                                     } else {}
                                   },

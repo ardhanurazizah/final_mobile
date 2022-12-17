@@ -57,4 +57,22 @@ class CrudHelper {
     final response = await post(url, body: body, headers: headers);
     return response;
   }
+
+  Future<Response> editCategori(Category category, String name) async {
+    final url = Uri.parse(_baseUrl + 'category/${category.id}');
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    const key = 'token';
+    final value = pref.get(key);
+    final token = value;
+    final body = {
+      'name': name,
+    };
+    final headers = {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + '$token',
+    };
+
+    final response = await put(url, body: body, headers: headers);
+    return response;
+  }
 }
